@@ -1,16 +1,16 @@
 import { expect } from '@playwright/test';
 import { BaseAPI } from '../BaseApi';
+import { ROUTES } from '../../constants/apiRoutes';
 
 export class ProfilesApi extends BaseAPI {
   constructor(request) {
     super(request);
-    this._endpoint = '/api/profiles';
     this._headers = { 'content-type': 'application/json' };
   }
 
   async getProfile(username, token = null) {
     return await this.step(`Get profile for a user`, async () => {
-      return await this.request.get(`${this._endpoint}/${username}`, {
+      return await this.request.get(ROUTES.profiles(username).index, {
         headers: {
           authorization: `Token ${token}`,
           ...this._headers,
@@ -21,19 +21,13 @@ export class ProfilesApi extends BaseAPI {
 
   async followProfile(username) {
     return await this.step(`Follow user's profile`, async () => {
-      return await this.request.post(
-        `${this._endpoint}/${username}/follow`,
-        {},
-      );
+      return await this.request.post(ROUTES.profiles(username).follow, {});
     });
   }
 
   async unfollowProfile(username) {
     return await this.step(`Unfollow user's profile`, async () => {
-      return await this.request.get(
-        `${this._endpoint}/${username}/unfollow`,
-        {},
-      );
+      return await this.request.get(ROUTES.profiles(username).follow, {});
     });
   }
 
