@@ -5,13 +5,17 @@ import { generateNewUserData } from '../../src/common/testData/generateNewUserDa
 import * as allure from 'allure-js-commons';
 import { parseTestTreeHierarchy } from '../../src/common/helpers/allureHelpers';
 
-export const test = base.extend<{
-  usersNumber;
-  contextsNumber;
-  logger;
-  infoTestLog;
-  addAllureTestHierarchy;
-}>({
+export const test = base.extend<
+  {
+    usersNumber;
+    contextsNumber;
+    infoTestLog;
+    addAllureTestHierarchy;
+  },
+  {
+    logger;
+  }
+>({
   usersNumber: [1, { option: true }],
   contextsNumber: [1, { option: true }],
   logger: [
