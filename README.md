@@ -1,4 +1,4 @@
-# qa_pw_conduit_article_api# Conduit API testing
+# Conduit follow/unfollow prifile and create/read article API testing
 
 ## Table of contents
 
