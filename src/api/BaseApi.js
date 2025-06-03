@@ -23,6 +23,13 @@ export class BaseAPI {
     return response.status();
   }
 
+  async assertPropertyValueInResponse(response, property, value = null) {
+    await this.step(`Assert response has property ${property}`, async () => {
+      const body = await this.parseBody(response);
+      expect(body).toHaveProperty(property, value);
+    });
+  }
+
   async parseBody(response) {
     return await response.json();
   }
