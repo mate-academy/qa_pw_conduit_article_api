@@ -7,5 +7,5 @@ test(`Follow profile for existing user with empty auth token`, async ({
 }) => {
   const response = await profilesApi.followProfile(registeredUser.username);
 
-  await profilesApi.assertResponseCode(response, UNAUTHORIZED)
+  await profilesApi.assertUnauthorizedResponseCode(response)
 });

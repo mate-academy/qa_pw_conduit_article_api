@@ -10,5 +10,5 @@ test(`Follow profile for not existing user by other user`, async ({
 
   const response = await profilesApi.followProfile('randomUsername');
 
-  await profilesApi.assertResponseCode(response, NOT_FOUND);
+  await profilesApi.assertNotFoundResponseCode(response);
 });
