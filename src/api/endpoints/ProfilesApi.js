@@ -19,15 +19,25 @@ export class ProfilesApi extends BaseAPI {
     });
   }
 
-  async followProfile(username) {
+  async followProfile(username, token = null) {
     return await this.step(`Follow user's profile`, async () => {
-      return await this.request.post(ROUTES.profiles(username).follow, {});
+      return await this.request.post(ROUTES.profiles(username).follow, {
+        headers: {
+          authorization: token ? `Token ${token}` : '',
+          ...this._headers,
+        },
+      });
     });
   }
 
-  async unfollowProfile(username) {
+  async unfollowProfile(username, token = null) {
     return await this.step(`Unfollow user's profile`, async () => {
-      return await this.request.get(ROUTES.profiles(username).follow, {});
+      return await this.request.delete(ROUTES.profiles(username).follow, {
+        headers: {
+          authorization: token ? `Token ${token}` : '',
+          ...this._headers,
+        },
+      });
     });
   }
 
