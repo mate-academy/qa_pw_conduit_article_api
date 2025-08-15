@@ -10,5 +10,5 @@ test('Create article without title', async ({
     tagList: []
   });
 
-  await articleApiAuth.assertSuccessResponseCode(response);
+  await articleApiAuth.assertUnprocessableEntityResponseCode(response);
 });

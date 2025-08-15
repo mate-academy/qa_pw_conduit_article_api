@@ -19,6 +19,17 @@ export class ArticlesApi extends BaseAPI {
     });
   }
 
+  async getArticleBySlug(slug) {
+    return await this.step(`get article by slug: ${slug}`, async () => {
+      const response = await this.request.get(`${this._endpoint}/${slug}`, {
+        headers: this._headers,
+      });
+
+      return response;
+    });
+  }
+
+
   async createNewArticle(articleData) {
     return await this.step(`Create new article`, async () => {
       return await this.request.post(ROUTES.articles, {
@@ -44,11 +55,11 @@ export class ArticlesApi extends BaseAPI {
     });
   }
 
-  async assertBodyHasCorrectValue(response, bodyy) {
+  async assertBodyHasCorrectValue(response, body) {
     await this.step(`Assert response body has correct body`, async () => {
       const body = await this.parseBody(response);
 
-      expect(body.article.bodyy).toBe(bodyy);
+      expect(body.article.body).toBe(body);
     });
   }
 
