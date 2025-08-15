@@ -25,9 +25,11 @@ export class ProfilesApi extends BaseAPI {
     });
   }
 
-  async unfollowProfile(username) {
+  async unfollowProfile(username, headers = this._headers) {
     return await this.step(`Unfollow user's profile`, async () => {
-      return await this.request.delete(ROUTES.profiles(username).follow, {});
+      return await this.request.delete(ROUTES.profiles(username).follow, {
+        headers
+      });
     });
   }
 

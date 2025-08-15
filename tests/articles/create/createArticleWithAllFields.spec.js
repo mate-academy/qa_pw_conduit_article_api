@@ -8,6 +8,6 @@ test('Create article with all fields', async ({
 
   await articleApiAuth.assertTitleHasCorrectValue(response, newArticleData.title);
   await articleApiAuth.assertDescriptionHasCorrectValue(response, newArticleData.description);
-  await articleApiAuth.assertBodyHasCorrectValue(response, newArticleData.bodyy);
+  await articleApiAuth.assertBodyHasCorrectValue(response, newArticleData.body);
   await articleApiAuth.assertTagListHasCorrectValue(response, newArticleData.tagList);
 });
