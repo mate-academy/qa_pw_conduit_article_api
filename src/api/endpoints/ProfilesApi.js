@@ -10,24 +10,47 @@ export class ProfilesApi extends BaseAPI {
 
   async getProfile(username, token = null) {
     return await this.step(`Get profile for a user`, async () => {
+      const headers = {
+        ...this._headers,
+      };
+      if (token !== null) {
+        headers.authorization = `Token ${token}`;
+      }
       return await this.request.get(ROUTES.profiles(username).index, {
-        headers: {
-          authorization: `Token ${token}`,
-          ...this._headers,
-        },
+        headers,
       });
     });
   }
 
-  async followProfile(username) {
+  async followProfile(username, token = null) {
     return await this.step(`Follow user's profile`, async () => {
-      return await this.request.post(ROUTES.profiles(username).follow, {});
+      const headers = {
+        ...this._headers,
+      };
+
+      if (token !== null) {
+        headers.authorization = `Token ${token}`;
+      }
+
+      return await this.request.post(ROUTES.profiles(username).follow, {
+        headers,
+      });
     });
   }
 
-  async unfollowProfile(username) {
-    return await this.step(`Unfollow user's profile`, async () => {
-      return await this.request.get(ROUTES.profiles(username).follow, {});
+  async unFollowProfile(username, token = null) {
+    return await this.step(`UnFollow user's profile`, async () => {
+      const headers = {
+        ...this._headers,
+      };
+
+      if (token !== null) {
+        headers.authorization = `Token ${token}`;
+      }
+
+      return await this.request.delete(ROUTES.profiles(username).follow, {
+        headers,
+      });
     });
   }
 

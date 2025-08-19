@@ -9,6 +9,7 @@ export const test = base.extend<
   {
     usersNumber;
     contextsNumber;
+    tagsNumber;
     infoTestLog;
     addAllureTestHierarchy;
   },
@@ -18,6 +19,7 @@ export const test = base.extend<
 >({
   usersNumber: [1, { option: true }],
   contextsNumber: [1, { option: true }],
+  tagsNumber: [0, { option: true }],
   logger: [
     async ({}, use) => {
       const logger = new Logger('error');
