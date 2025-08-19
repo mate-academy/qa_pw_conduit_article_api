@@ -5,6 +5,7 @@ import {
   UNPROCESSABLE_ENTITY,
   UNAUTHORIZED,
   NOT_FOUND,
+  INTERNAL_SERVER_ERROR,
 } from '../constants/responceCodes';
 
 export class BaseAPI {
@@ -27,6 +28,10 @@ export class BaseAPI {
     return await response.json();
   }
 
+  async parseText(response) {
+    return await response.text();
+  }
+
   async parseIdFromBody(response) {
     const body = await this.parseBody(response);
 
@@ -41,6 +46,10 @@ export class BaseAPI {
 
   async assertSuccessResponseCode(response) {
     await this.assertResponseCode(response, SUCCESS_CODE);
+  }
+
+  async assertInternalServerErrorResponseCode(response) {
+    await this.assertResponseCode(response, INTERNAL_SERVER_ERROR);
   }
 
   async assertUnprocessableEntityResponseCode(response) {
@@ -63,14 +72,27 @@ export class BaseAPI {
     });
   }
 
-  async assertErrorMessageInResponseBody(response, message, key) {
+  async assertErrorMessageInJSONResponseBody(response, message, key = null) {
     await this.step(
-      `Assert response body contains error message ${key}:${message}`,
+      `Assert response body contains error message ${key ? `${key}:` : ''}${message}`,
       async () => {
         const body = await this.parseBody(response);
 
-        expect(`${key}:${body.errors[key]}`).toEqual(message);
+        if (key) {
+          // Если key передан, проверяем конкретное поле в errors
+          expect(body.errors[key]).toEqual(message);
+        } else {
+          // Если key не передан, проверяем общее сообщение об ошибке
+          expect(body.message || body.error).toEqual(message);
+        }
       },
     );
+  }
+
+  async assertTextResponseContains(response, message) {
+    await this.step(`Assert response text contains: ${message}`, async () => {
+      const text = await this.parseText(response);
+      expect(text).toContain(message);
+    });
   }
 }
