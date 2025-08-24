@@ -44,7 +44,6 @@ export const test = base.extend<{
       const response = await usersApi.registerNewUser(newUsersData[i]);
 
       await usersApi.assertSuccessResponseCode(response);
-
       newUsersData[i]['token'] = await usersApi.parseTokenFromBody(response);
     }
     await use(newUsersData);

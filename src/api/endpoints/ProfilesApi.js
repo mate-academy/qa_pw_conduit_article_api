@@ -8,26 +8,42 @@ export class ProfilesApi extends BaseAPI {
     this._headers = { 'content-type': 'application/json' };
   }
 
-  async getProfile(username, token = null) {
+  async getProfile(username, token) {
     return await this.step(`Get profile for a user`, async () => {
+      const headers = { ...this._headers };
+      if (token) {
+        headers.authorization = `Token ${token}`;
+      }
+
       return await this.request.get(ROUTES.profiles(username).index, {
-        headers: {
-          authorization: `Token ${token}`,
-          ...this._headers,
-        },
+        headers,
       });
     });
   }
 
-  async followProfile(username) {
+  async followProfile(username, token) {
     return await this.step(`Follow user's profile`, async () => {
-      return await this.request.post(ROUTES.profiles(username).follow, {});
+      const headers = { ...this._headers };
+      if (token) {
+        headers.authorization = `Token ${token}`;
+      }
+
+      return await this.request.post(ROUTES.profiles(username).follow, {
+        headers,
+      });
     });
   }
 
-  async unfollowProfile(username) {
+  async unfollowProfile(username, token) {
     return await this.step(`Unfollow user's profile`, async () => {
-      return await this.request.get(ROUTES.profiles(username).follow, {});
+      const headers = { ...this._headers };
+      if (token) {
+        headers.authorization = `Token ${token}`;
+      }
+
+      return await this.request.delete(ROUTES.profiles(username).follow, {
+        headers,
+      });
     });
   }
 
