@@ -5,10 +5,7 @@ test(`Create artile by unautorized user`, async ({
   newArticleWithoutTags,
   registeredUser,
 }) => {
-  const response = await articlesApi.createArticle(
-    newArticleWithoutTags,
-    registeredUser.username,
-  );
+  const response = await articlesApi.createArticle(newArticleWithoutTags, null);
 
   await articlesApi.assertUnauthorizedResponseCode(response);
 });

@@ -22,12 +22,17 @@ test.describe('Unauthorized unfollow user scenarios', () => {
 
   test(`Unfollow profile for NOT existing user by other user`, async ({
     userRequests,
+    registeredUsers,
   }) => {
     const user2Request = userRequests[1];
+    const user2 = registeredUsers[1];
 
     const profilesApi = new ProfilesApi(user2Request);
 
-    const response = await profilesApi.unfollowProfile('unknown_user_profile');
+    const response = await profilesApi.unfollowProfile(
+      'unknown_user_profile',
+      user2.token,
+    );
 
     await profilesApi.assertNotFoundResponseCode(response);
   });
@@ -37,7 +42,7 @@ test.describe('Unauthorized unfollow user scenarios', () => {
 
     const profilesApi = new ProfilesApi(unknownUserRequest);
 
-    const response = await profilesApi.unfollowProfile(user1.username);
+    const response = await profilesApi.unfollowProfile(user1.username, null);
 
     await profilesApi.assertUnauthorizedResponseCode(response);
   });

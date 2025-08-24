@@ -12,20 +12,7 @@ test.describe('Empty create Article scenarios', () => {
       registeredUser.token,
     );
 
-    await articlesApi.assertSuccessResponseCode(response);
-
-    await articlesApi.parseSlug(response);
-    await articlesApi.assertTitleCorrect(response, newArticleWithoutTags.title);
-    await articlesApi.assertDescriptionCorrect(
-      response,
-      newArticleWithoutTags.description,
-    );
-    await articlesApi.assertBodyCorrect(response, newArticleWithoutTags.body);
-    await articlesApi.assertTagListCorrect(
-      response,
-      newArticleWithoutTags.tagList,
-    );
-    await articlesApi.assertAuthorCorrect(response, registeredUser.username);
+    await articlesApi.assertUnprocessableEntityResponseCode(response);
   });
 
   test(`Create article with empty Body Text`, async ({
@@ -39,19 +26,6 @@ test.describe('Empty create Article scenarios', () => {
       registeredUser.token,
     );
 
-    await articlesApi.assertSuccessResponseCode(response);
-
-    await articlesApi.parseSlug(response);
-    await articlesApi.assertTitleCorrect(response, newArticleWithOneTag.title);
-    await articlesApi.assertDescriptionCorrect(
-      response,
-      newArticleWithOneTag.description,
-    );
-    await articlesApi.assertBodyCorrect(response, newArticleWithOneTag.body);
-    await articlesApi.assertTagListCorrect(
-      response,
-      newArticleWithOneTag.tagList,
-    );
-    await articlesApi.assertAuthorCorrect(response, registeredUser.username);
+    await articlesApi.assertUnprocessableEntityResponseCode(response);
   });
 });

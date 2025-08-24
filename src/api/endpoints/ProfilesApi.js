@@ -8,7 +8,7 @@ export class ProfilesApi extends BaseAPI {
     this._headers = { 'content-type': 'application/json' };
   }
 
-  async getProfile(username, token = null) {
+  async getProfile(username, token) {
     return await this.step(`Get profile for a user`, async () => {
       return await this.request.get(ROUTES.profiles(username).index, {
         headers: {
@@ -25,9 +25,14 @@ export class ProfilesApi extends BaseAPI {
     });
   }
 
-  async unfollowProfile(username) {
+  async unfollowProfile(username, token) {
     return await this.step(`Unfollow user's profile`, async () => {
-      return await this.request.delete(ROUTES.profiles(username).follow, {});
+      return await this.request.delete(ROUTES.profiles(username).follow, {
+        headers: {
+          authorization: `Token ${token}`,
+          ...this._headers,
+        },
+      });
     });
   }
 

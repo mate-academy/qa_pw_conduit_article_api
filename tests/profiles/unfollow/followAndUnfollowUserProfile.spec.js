@@ -3,7 +3,7 @@ import { test } from '../../_fixtures/fixtures';
 
 test.use({ usersNumber: 2 });
 
-test.describe('Unauthorized follow user scenarios', () => {
+test.describe('Authorized follow user scenarios', () => {
   test(`Follow profile for existing user by other user`, async ({
     registeredUsers,
     userRequests,
@@ -24,13 +24,18 @@ test.describe('Unauthorized follow user scenarios', () => {
   test(`Unfollow profile for existing user by other user`, async ({
     registeredUsers,
     userRequests,
+    //profilesApi,
   }) => {
     const user1 = registeredUsers[0];
+    const user2 = registeredUsers[1];
     const user2Request = userRequests[1];
 
     const profilesApi = new ProfilesApi(user2Request);
 
-    const response = await profilesApi.unfollowProfile(user1.username);
+    const response = await profilesApi.unfollowProfile(
+      user1.username,
+      user2.token,
+    );
 
     await profilesApi.assertSuccessResponseCode(response);
 

@@ -8,7 +8,7 @@ export class ArticlesApi extends BaseAPI {
     this._headers = { 'content-type': 'application/json' };
   }
 
-  async createArticle(articleData, token = null) {
+  async createArticle(articleData, token) {
     return await this.step(`Create new Article`, async () => {
       return await this.request.post(ROUTES.articles().index, {
         data: { article: articleData },
@@ -20,7 +20,7 @@ export class ArticlesApi extends BaseAPI {
     });
   }
 
-  async editArticle(articleData, slug, token = null) {
+  async editArticle(articleData, slug, token) {
     return await this.step(`Update new Article`, async () => {
       return await this.request.get(ROUTES.articles(slug).certain, {
         data: { article: articleData },
