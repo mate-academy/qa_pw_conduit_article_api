@@ -10,43 +10,54 @@ export class ArticlesApi extends BaseAPI {
 
   async createArticle(articleData, token) {
     return await this.step(`Create new Article`, async () => {
+      const headers = { ...this._headers };
+      if (token) {
+        headers.authorization = `Token ${token}`;
+      }
+
       return await this.request.post(ROUTES.articles().index, {
         data: { article: articleData },
-        headers: {
-          authorization: `Token ${token}`,
-          ...this._headers,
-        },
+        headers,
       });
     });
   }
 
   async editArticle(articleData, slug, token) {
-    return await this.step(`Update new Article`, async () => {
-      return await this.request.get(ROUTES.articles(slug).certain, {
+    return await this.step(`Update the Article`, async () => {
+      const headers = { ...this._headers };
+      if (token) {
+        headers.authorization = `Token ${token}`;
+      }
+
+      return await this.request.put(ROUTES.articles(slug).certain, {
         data: { article: articleData },
-        headers: {
-          authorization: `Token ${token}`,
-          ...this._headers,
-        },
+        headers,
       });
     });
   }
 
-  async getArticle(slug) {
+  async getArticle(slug, token) {
     return await this.step(`Read the Article`, async () => {
+      const headers = { ...this._headers };
+      if (token) {
+        headers.authorization = `Token ${token}`;
+      }
+
       return await this.request.get(ROUTES.articles(slug).certain, {
-        headers: this._headers,
+        headers,
       });
     });
   }
 
   async deleteArticle(slug, token = null) {
     return await this.step(`Delete the Article`, async () => {
-      return await this.request.get(ROUTES.articles(slug).certain, {
-        headers: {
-          authorization: `Token ${token}`,
-          ...this._headers,
-        },
+      const headers = { ...this._headers };
+      if (token) {
+        headers.authorization = `Token ${token}`;
+      }
+
+      return await this.request.delete(ROUTES.articles(slug).certain, {
+        headers,
       });
     });
   }
