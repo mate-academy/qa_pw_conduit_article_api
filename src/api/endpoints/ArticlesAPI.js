@@ -10,7 +10,6 @@ export class ArticleApi extends BaseAPI {
 
   async createArticle(articleData) {
     return await this.step('Create article', async () => {
-      console.log(ROUTES.articles().index);
       return await this.request.post(
         ROUTES.articles().index, {
           data: { article: articleData },
@@ -20,7 +19,7 @@ export class ArticleApi extends BaseAPI {
   }
 
   async readArticle(articleName) {
-    return await this.step('Create article', async () =>{
+    return await this.step(`Read the article ${articleName}`, async () =>{
       return await this.request.get(ROUTES.articles(articleName).read);
     });
   }
@@ -37,7 +36,7 @@ export class ArticleApi extends BaseAPI {
     return await this.step('Get article slug from article response',
       async () => {
         const body = await this.parseBody(response);
-        return await body.article.slug;
+        return body.article.slug;
     });
   }
 }

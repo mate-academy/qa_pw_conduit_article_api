@@ -5,7 +5,7 @@ import { test } from '../../_fixtures/fixtures';
 test.use({usersNumber: 2})
 
 test(
-  'Read existing article by unauthorized user',
+  'Read article created by user1 as authorized user2',
   async ({ newArticle,  userRequests}) => {
     const articleApi1 = new ArticleApi(userRequests[0]);
     const articleApi2 = new ArticleApi(userRequests[1]);
@@ -18,22 +18,22 @@ test(
 
     await articleApi2.assertSuccessResponseCode(responseOfReadArticle);
     await articleApi2.assertArticleHasFieldValue(
-        responseOfCreateArticle,
+        responseOfReadArticle,
         'title',
         newArticle.title,
     );
     await articleApi2.assertArticleHasFieldValue(
-        responseOfCreateArticle,
+      responseOfReadArticle,
         'description',
         newArticle.description,
     );
     await articleApi2.assertArticleHasFieldValue(
-        responseOfCreateArticle,
+        responseOfReadArticle,
         'body',
         newArticle.body,
     );
     await articleApi2.assertArticleHasFieldValue(
-        responseOfCreateArticle,
+        responseOfReadArticle,
         'tagList',
         newArticle.tagList,
     );

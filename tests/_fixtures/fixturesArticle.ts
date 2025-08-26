@@ -16,12 +16,12 @@ export const test = base.extend<{
   },
   articleWithEmptyBody: async ({logger}, use) => {
     const article = generateNewArticleData(logger)
-    article['body'] = '';
+    delete article['body'];
     await use(article);
   },
   articleWithEmptyTitle: async ({logger}, use) => {
     const article = generateNewArticleData(logger)
-    article['title'] = '';
+    delete article['title'];
     await use(article);
   },
   newArticle: async ({logger}, use) => {

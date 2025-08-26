@@ -5,13 +5,13 @@ test.use({usersNumber: 1})
 
 test(
   `Unfollow profile for not existing user by other user`,
-  async ({ userRequests, newUsersData}) => {
+  async ({ userRequests, newUserData}) => {
 
-    const notExistingUserName = newUsersData.username;
+    const notExistingUserName = newUserData.username + '_notfound';
     const userRequest = await userRequests[0];
     const profilesApi = new ProfilesApi(userRequest);
 
     const response = await profilesApi.unfollowProfile(notExistingUserName);
     await profilesApi.assertNotFoundResponseCode(response);
-    
+
   });

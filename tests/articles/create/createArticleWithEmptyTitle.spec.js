@@ -11,21 +11,6 @@ test(
     const articleApi = new ArticleApi(userRequest);
     const response = await articleApi.createArticle(articleWithEmptyTitle);
 
-    await articleApi.assertSuccessResponseCode(response);
-    await articleApi.assertArticleHasFieldValue(
-      response,
-      'title',
-      articleWithEmptyTitle.title,
-    );
-    await articleApi.assertArticleHasFieldValue(
-      response,
-      'description',
-      articleWithEmptyTitle.description,
-    );
-    await articleApi.assertArticleHasFieldValue(
-      response,
-      'body',
-      articleWithEmptyTitle.body,
-    );
-    await articleApi.assertArticleHasFieldValue(response, 'tagList', []);
+    await articleApi.assertUnprocessableEntityResponseCode(response);
+
 });

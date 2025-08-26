@@ -10,27 +10,6 @@ test(
     const userRequest = await userRequests[0];
     const articleApi = new ArticleApi(userRequest);
     const response = await articleApi.createArticle(articleWithEmptyBody);
-
-    await articleApi.assertSuccessResponseCode(response);
-    await articleApi.assertArticleHasFieldValue(
-      response,
-      'title',
-      articleWithEmptyBody.title,
-    );
-    await articleApi.assertArticleHasFieldValue(
-      response,
-      'description',
-      articleWithEmptyBody.description,
-    );
-    await articleApi.assertArticleHasFieldValue(
-      response,
-      'body',
-      articleWithEmptyBody.body,
-    );
-    await articleApi.assertArticleHasFieldValue(
-      response,
-      'tagList',
-      [],
-    );
+    await articleApi.assertUnprocessableEntityResponseCode(response);
 
 });

@@ -19,22 +19,22 @@ test(
     await articleApi2.assertSuccessResponseCode(responseOfReadArticle);
 
     await articleApi2.assertArticleHasFieldValue(
-        responseOfCreateArticle,
+        responseOfReadArticle,
         'title',
         newArticle.title,
     );
     await articleApi2.assertArticleHasFieldValue(
-        responseOfCreateArticle,
+        responseOfReadArticle,
         'description',
         newArticle.description,
     );
     await articleApi2.assertArticleHasFieldValue(
-        responseOfCreateArticle,
+        responseOfReadArticle,
         'body',
         newArticle.body,
     );
     await articleApi2.assertArticleHasFieldValue(
-        responseOfCreateArticle,
+        responseOfReadArticle,
         'tagList',
         newArticle.tagList,
     );
