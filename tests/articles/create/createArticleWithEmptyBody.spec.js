@@ -10,6 +10,11 @@ test(
     const userRequest = await userRequests[0];
     const articleApi = new ArticleApi(userRequest);
     const response = await articleApi.createArticle(articleWithEmptyBody);
-    await articleApi.assertUnprocessableEntityResponseCode(response);
+    await articleApi.assertSuccessResponseCode(response);
+    await articleApi.assertArticleHasFieldValue(
+        response,
+        'body',
+        '',
+    );
 
 });

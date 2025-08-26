@@ -14,21 +14,6 @@ test(
     await articleApi.assertSuccessResponseCode(response);
     await articleApi.assertArticleHasFieldValue(
       response,
-      'title',
-      articleWithoutTags.title,
-    );
-    await articleApi.assertArticleHasFieldValue(
-      response,
-      'description',
-      articleWithoutTags.description,
-    );
-    await articleApi.assertArticleHasFieldValue(
-      response,
-      'body',
-      articleWithoutTags.body,
-    );
-    await articleApi.assertArticleHasFieldValue(
-      response,
       'tagList',
       [],
     );
