@@ -5,10 +5,7 @@ test(`Read profile after user created`, async ({
   registeredUser,
   profilesApi,
 }) => {
-  const response = await profilesApi.getProfile(
-    registeredUser.username,
-    registeredUser.token,
-  );
+  const response = await profilesApi.getProfile(registeredUser.username);
 
   await profilesApi.assertSuccessResponseCode(response);
 
