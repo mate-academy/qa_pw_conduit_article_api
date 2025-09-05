@@ -30,15 +30,15 @@ The full list is described in the [documentation](https://documenter.getpostman.
 1. Сreate tests for the `Follow user` profile operation: 
 - *Follow not existing user profile*
 - *Follow existing user with empty auth token*
-2. Creast folder `unfollow` under the `tests\profiles` folder.
+2. Create folder `unfollow` under the `tests\profiles` folder.
 3. Сreate tests for the `Unfollow user` profile operation: 
 - *Unfollow existing user prorfile*
 - *Unfollow not existing user profile*
 - *Unfollow existing user with empty auth token*
-4. Use the exisiting *Unfollow existing user prorfile* tests as examples.
-4. Create folder `articles` under the `tests` folder.
-5. Create folder `create` and `read` under the `tests\articles` folder.
-6. Create tests:
+5. Use the exisiting *Unfollow existing user prorfile* tests as examples.
+6. Create folder `articles` under the `tests` folder.
+7. Create folder `create` and `read` under the `tests\articles` folder.
+8. Create tests:
 - *Create article with empty tags array*  
 - *Create article with empty body*  
 - *Create article with empty title*  
