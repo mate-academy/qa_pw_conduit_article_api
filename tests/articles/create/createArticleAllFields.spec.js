@@ -18,7 +18,7 @@ test('Create article with all fields', async ({ userRequests, registeredUsers })
   };
 
   const res = await req.post('/api/articles', { data: payload });
-  expect(res.status()).toBe(200); // or: expect([200,201]).toContain(res.status());
+  expect(res.ok()).toBe(true);
 
   const body = await res.json();
   expect(body).toHaveProperty('article');

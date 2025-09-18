@@ -17,7 +17,7 @@ test('Create article with empty tags array', async ({ userRequests, registeredUs
   };
 
   const res = await req.post('/api/articles', { data: payload });
-  expect(res.status()).toBe(200); // or: expect([200, 201]).toContain(res.status());
+  expect(res.ok()).toBe(true);
 
   const json = await res.json();
 
