@@ -13,7 +13,7 @@ In this task you need to create tests for the [Conduit](https://conduit.mate.aca
 - following and unfollowing user profile;
 - create and read articles;
 
-The full list is described in the [documentation](https://documenter.getpostman.com/view/22790481/2sB2j1iY5B)
+The full list is described in the [documentation](https://documenter.getpostman.com/view/48909389/2sB3QFQXfE)
 
 ## Preparation
 
