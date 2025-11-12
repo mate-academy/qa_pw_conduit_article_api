@@ -10,6 +10,7 @@ export const test = base.extend<{
   registeredUser;
   registeredUsers;
   userRequests;
+  emptyAuthRequest;
 }>({
   usersApi: async ({ request }, use) => {
     const client = new UsersApi(request);
@@ -62,4 +63,13 @@ export const test = base.extend<{
     }
     await use(userRequests);
   },
+  emptyAuthRequest: async ({}, use) => {
+    const context = await apiRequest.newContext({
+      extraHTTPHeaders: {
+        authorization: 'Token ',
+        'content-type': 'application/json',
+      },
+    });
+    await use(context);
+  }
 });
