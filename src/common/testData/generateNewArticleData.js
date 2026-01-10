@@ -6,8 +6,8 @@ export function generateNewArticleData(logger, tagNumber = 0) {
   const article = {
     title: faker.lorem.words(5),
     description: faker.lorem.sentence(4),
-    text: faker.lorem.sentences(2),
-    tags,
+    body: faker.lorem.sentences(2),
+    tagList: tags.length > 0 ? tags : [],
   };
 
   logger.debug(`Generated new article data: ${JSON.stringify(article)}`);

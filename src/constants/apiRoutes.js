@@ -10,4 +10,5 @@ export const ROUTES = {
     index: `${ROOT}/profiles/${username}`,
     follow: `${ROOT}/profiles/${username}/follow`,
   }),
+  articles: `${ROOT}/articles`,
 };
