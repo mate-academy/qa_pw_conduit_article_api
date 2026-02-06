@@ -3,7 +3,8 @@ import { faker } from '@faker-js/faker';
 export function generateNewUserData(logger = null) {
   const firstName = faker.person.firstName();
   const lastName = faker.person.lastName();
-  const uniqueSuffix = `${faker.number.int({ min: 10000, max: 99999 })}${faker.string.alpha({ length: 6, casing: 'lower' })}`;
+  const uniqueSuffix = `${faker.number.int({ min: 10000, max: 99999 })}` +
+    `${faker.string.alpha({ length: 6, casing: 'lower' })}`;
   const safeUsername = `user${uniqueSuffix}`.toLowerCase();
 
   const user = {
