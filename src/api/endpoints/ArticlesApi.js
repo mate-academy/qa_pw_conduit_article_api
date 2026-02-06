@@ -64,7 +64,10 @@ export class ArticlesApi extends BaseAPI {
     await this.step(`Assert response body has correct tags`, async () => {
       const body = await this.parseBody(response);
 
-      expect(body.article.tagList).toEqual(tags);
+      const actualTags = [...body.article.tagList].sort();
+      const expectedTags = [...tags].sort();
+
+      expect(actualTags).toEqual(expectedTags);
     });
   }
 }
