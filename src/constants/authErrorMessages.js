@@ -4,3 +4,5 @@ export const INVALID_EMAIL_MESSAGE = `email:This email does not seem valid.`;
 export const EMPTY_EMAIL_MESSAGE = `email:can't be blank`;
 export const EMPTY_PASSWORD_MESSAGE = `password:can't be blank`;
 export const INVALID_EMAIL_OR_PASSWORD_MESSAGE = `email or password:is invalid`;
+export const EMPTY_ARTICLE_TITLE = `0:Article title cannot be empty`;
+export const EMPTY_ARTICLE_BODY = `0:Article body cannot be empty`;

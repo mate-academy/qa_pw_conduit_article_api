@@ -69,7 +69,7 @@ export class BaseAPI {
       async () => {
         const body = await this.parseBody(response);
 
-        expect(`${key}:${body.errors[key]}`).toEqual(message);
+        expect(`${key}:${body.errors[key][0]}`).toEqual(message);
       },
     );
   }
