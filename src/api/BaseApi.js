@@ -13,6 +13,7 @@ export class BaseAPI {
 
   constructor(request) {
     this.request = request;
+    this._headers = { 'content-type': 'application/json' };
   }
 
   async step(title, stepToRun) {

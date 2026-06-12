@@ -1,2 +1,2 @@
-export const DEFAULT_IMAGE_LINK =
-  'https://static.productionready.io/images/smiley-cyrus.jpg';
+// Note: The API recently started returning relative paths
+export const DEFAULT_IMAGE_LINK = '/images/smiley-cyrus.jpg';

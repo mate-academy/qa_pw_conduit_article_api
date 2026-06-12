@@ -3,11 +3,6 @@ import { BaseAPI } from '../BaseApi';
 import { ROUTES } from '../../constants/apiRoutes';
 
 export class UsersApi extends BaseAPI {
-  constructor(request) {
-    super(request);
-    this._headers = { 'content-type': 'application/json' };
-  }
-
   async registerNewUser(userData) {
     return await this.step(`Register new user`, async () => {
       return await this.request.post(ROUTES.users.index, {

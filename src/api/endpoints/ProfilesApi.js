@@ -3,11 +3,6 @@ import { BaseAPI } from '../BaseApi';
 import { ROUTES } from '../../constants/apiRoutes';
 
 export class ProfilesApi extends BaseAPI {
-  constructor(request) {
-    super(request);
-    this._headers = { 'content-type': 'application/json' };
-  }
-
   async getProfile(username) {
     return await this.step(`Get profile for a user`, async () => {
       return await this.request.get(ROUTES.profiles(username).index, {
@@ -18,13 +13,17 @@ export class ProfilesApi extends BaseAPI {
 
   async followProfile(username) {
     return await this.step(`Follow user's profile`, async () => {
-      return await this.request.post(ROUTES.profiles(username).follow, {});
+      return await this.request.post(ROUTES.profiles(username).follow, {
+        headers: this._headers,
+      });
     });
   }
 
   async unfollowProfile(username) {
     return await this.step(`Unfollow user's profile`, async () => {
-      return await this.request.get(ROUTES.profiles(username).follow, {});
+      return await this.request.delete(ROUTES.profiles(username).follow, {
+        headers: this._headers,
+      });
     });
   }
 
@@ -67,10 +66,10 @@ export class ProfilesApi extends BaseAPI {
   }
 
   async assertFollowingHasValueFalse(response) {
-    this.assertFollowingFieldHasValue(response, false);
+    await this.assertFollowingFieldHasValue(response, false);
   }
 
   async assertFollowingHasValueTrue(response) {
-    this.assertFollowingFieldHasValue(response, true);
+    await this.assertFollowingFieldHasValue(response, true);
   }
 }
