@@ -6,6 +6,9 @@ export const ROUTES = {
     index: `${ROOT}/users`,
     login: `${ROOT}/users/login`,
   },
+  articles: {
+    index: `${ROOT}/articles`,
+  },
   profiles: username => ({
     index: `${ROOT}/profiles/${username}`,
     follow: `${ROOT}/profiles/${username}/follow`,
