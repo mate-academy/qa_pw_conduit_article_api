@@ -10,12 +10,10 @@ test(`Follow profile for user with empty auth token`, async ({
   const user1 = registeredUsers[0];
   const user2Request = userRequests[1];
   
-  const unexistUser ={
-    ...user2Request,
-    token: ' ' 
-  };
-  const profilesApi = new ProfilesApi(user2Request);
-  const response = await profilesApi.followProfile(unexistUser.username);
 
-  await profilesApi.assertNotFoundResponseCode(response);
+  const profilesApi = new ProfilesApi(user2Request);
+  profilesApi.setHeader('authorization', '');
+  const response = await profilesApi.followProfile(user1.username);
+
+  await profilesApi.assertUnauthorizedResponseCode(response);
 });

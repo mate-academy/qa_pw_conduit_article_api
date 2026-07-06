@@ -10,16 +10,10 @@ test(`Unfollow profile for existing user by other user`, async ({
   const user1 = registeredUsers[0];
   const user2Request = userRequests[1];
 
-  const notExistingUser ={
-    ...user2Request,
-    token: ' ',
-  };
 
   const profilesApi = new ProfilesApi(user2Request);
+  profilesApi.setHeader('authorization', '');
 
-  const response = await profilesApi.unfollowProfile(notExistingUser.username);
-
-
-
-  await profilesApi.assertNotFoundResponseCode(response);
+  const response = await profilesApi.unfollowProfile(user1.username);
+  await profilesApi.assertUnauthorizedResponseCode(response);
 });

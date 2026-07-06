@@ -33,6 +33,10 @@ export class BaseAPI {
     return body.id;
   }
 
+  async setHeader(key, value) {
+    this._headers[key] = value;
+  }
+
   async assertResponseCode(response, code) {
     await this.step(`Assert the code ${code} is returned`, async () => {
       expect(this.parseStatus(response)).toEqual(code);
