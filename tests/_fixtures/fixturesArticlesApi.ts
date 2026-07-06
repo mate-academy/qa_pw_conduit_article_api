@@ -19,7 +19,7 @@ export const test = base.extend <{
   },
 
   newArticleData: async ({ logger }, use) => {
-    const articleData = generateNewArticleData(logger);
+    const articleData = generateNewArticleData(logger,3);
 
     await use(articleData);
   },

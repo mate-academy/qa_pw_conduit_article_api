@@ -13,7 +13,7 @@ test(`Unfollow profile for existing user by other user`, async ({
 
   const profilesApi = new ProfilesApi(user2Request);
 
-  const response = await profilesApi.unfollowProfile(user2Request.username);
+  const response = await profilesApi.unfollowProfile('nonExistentUser12345');
 
   await profilesApi.assertNotFoundResponseCode(response);
 });
