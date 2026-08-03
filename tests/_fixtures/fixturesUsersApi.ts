@@ -10,6 +10,7 @@ export const test = base.extend<{
   registeredUser;
   registeredUsers;
   userRequests;
+  followedUser;
 }>({
   usersApi: async ({ request }, use) => {
     const client = new UsersApi(request);
@@ -49,6 +50,7 @@ export const test = base.extend<{
     }
     await use(newUsersData);
   },
+
   userRequests: async ({ registeredUsers, usersNumber }, use) => {
     const userRequests = Array(usersNumber);
 
