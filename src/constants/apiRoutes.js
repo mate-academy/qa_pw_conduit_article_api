@@ -10,4 +10,10 @@ export const ROUTES = {
     index: `${ROOT}/profiles/${username}`,
     follow: `${ROOT}/profiles/${username}/follow`,
   }),
+  articles: Object.assign(
+    articleSlug => ({
+      read: `${ROOT}/articles/${articleSlug}`,
+    }),
+    { index: `${ROOT}/articles` },
+  ),
 };
