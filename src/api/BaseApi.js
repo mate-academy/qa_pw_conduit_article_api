@@ -5,18 +5,20 @@ import {
   UNPROCESSABLE_ENTITY,
   UNAUTHORIZED,
   NOT_FOUND,
+  INTERNAL_SERVER_ERROR,
 } from '../constants/responceCodes';
 
 export class BaseAPI {
   _endpoint;
   _headers;
 
-  constructor(request) {
+  constructor(request, userId = 0) {
     this.request = request;
+    this.userId = userId;
   }
 
-  async step(title, stepToRun) {
-    return await testStep(title, stepToRun);
+  async step(title, stepToRun, userId = this.userId) {
+    return await testStep(title, stepToRun, userId);
   }
 
   parseStatus(response) {
@@ -53,6 +55,9 @@ export class BaseAPI {
 
   async assertNotFoundResponseCode(response) {
     await this.assertResponseCode(response, NOT_FOUND);
+  }
+  async assertInternalServerErrorResponseCode(response) {
+    await this.assertResponseCode(response, INTERNAL_SERVER_ERROR);
   }
 
   async assertBodyIsNotEmpty(response) {

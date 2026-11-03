@@ -3,8 +3,8 @@ import { BaseAPI } from '../BaseApi';
 import { ROUTES } from '../../constants/apiRoutes';
 
 export class ProfilesApi extends BaseAPI {
-  constructor(request) {
-    super(request);
+  constructor(request, userId) {
+    super(request, userId);
     this._headers = { 'content-type': 'application/json' };
   }
 
@@ -24,7 +24,7 @@ export class ProfilesApi extends BaseAPI {
 
   async unfollowProfile(username) {
     return await this.step(`Unfollow user's profile`, async () => {
-      return await this.request.get(ROUTES.profiles(username).follow, {});
+      return await this.request.delete(ROUTES.profiles(username).follow, {});
     });
   }
 

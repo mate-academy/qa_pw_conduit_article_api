@@ -11,8 +11,13 @@ export function parseTestTreeHierarchy(fileName, logger) {
     capitalize(camelCaseToPhrase(attribute)),
   );
 
-  if (attributes[2].includes('.spec.js')) {
-    attributes = attributes.slice(0, 2);
+  // if (attributes[2].includes('.spec.js')) {
+  //   attributes = attributes.slice(0, 2);
+  // }
+  const lastAttribute = attributes[attributes.length - 1];
+
+  if (lastAttribute.includes('.spec.js')) {
+    attributes = attributes.slice(0, -1);
   }
 
   logger.debug(`Parsed test hierarchy: ${JSON.stringify(attributes)}`);
