@@ -39,13 +39,16 @@ export const test = base.extend<{
 
     await use(newUserData);
   },
-  registeredUsers: async ({ usersApi, newUsersData, usersNumber }, use) => {
+
+  registeredUsers: async ({ request, newUsersData, usersNumber }, use) => {
     for (let i = 0; i < usersNumber; i++) {
-      const response = await usersApi.registerNewUser(newUsersData[i]);
+      const userApi = new UsersApi(request, i + 1);
 
-      await usersApi.assertSuccessResponseCode(response);
+      const response = await userApi.registerNewUser(newUsersData[i]);
 
-      newUsersData[i]['token'] = await usersApi.parseTokenFromBody(response);
+      await userApi.assertSuccessResponseCode(response);
+
+      newUsersData[i]['token'] = await userApi.parseTokenFromBody(response);
     }
     await use(newUsersData);
   },

@@ -3,8 +3,8 @@ import { BaseAPI } from '../BaseApi';
 import { ROUTES } from '../../constants/apiRoutes';
 
 export class UsersApi extends BaseAPI {
-  constructor(request) {
-    super(request);
+  constructor(request, userId) {
+    super(request, userId);
     this._headers = { 'content-type': 'application/json' };
   }
 

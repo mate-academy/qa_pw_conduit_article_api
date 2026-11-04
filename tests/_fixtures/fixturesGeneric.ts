@@ -1,7 +1,5 @@
 import { test as base } from '@playwright/test';
-import { request as apiRequest } from '@playwright/test';
 import { Logger } from '../../src/common/logger/Logger';
-import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
 import * as allure from 'allure-js-commons';
 import { parseTestTreeHierarchy } from '../../src/common/helpers/allureHelpers';
 
