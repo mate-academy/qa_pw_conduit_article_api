@@ -1,5 +1,4 @@
 import { test } from '../../_fixtures/fixtures';
-import { TITLE_CANNOT_BE_EMPTY } from '../../../src/constants/articleErrorMessages';
 
 test(`Create article with empty title`, async ({
   articlesApi,

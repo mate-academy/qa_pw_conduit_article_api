@@ -67,10 +67,10 @@ export class ProfilesApi extends BaseAPI {
   }
 
   async assertFollowingHasValueFalse(response) {
-    this.assertFollowingFieldHasValue(response, false);
+    await this.assertFollowingFieldHasValue(response, false);
   }
 
   async assertFollowingHasValueTrue(response) {
-    this.assertFollowingFieldHasValue(response, true);
+    await this.assertFollowingFieldHasValue(response, true);
   }
 }

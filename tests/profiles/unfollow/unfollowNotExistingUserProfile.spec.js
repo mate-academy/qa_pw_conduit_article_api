@@ -10,6 +10,6 @@ test(`Unfollow not existing user profile`, async ({ userRequests }) => {
 
   const profilesApi = new ProfilesApi(user2Request);
 
-  const response = await profilesApi.followProfile(fakeUserName);
+  const response = await profilesApi.unfollowProfile(fakeUserName);
   await profilesApi.assertNotFoundResponseCode(response);
 });
