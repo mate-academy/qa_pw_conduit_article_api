@@ -5,6 +5,7 @@ import {
   UNPROCESSABLE_ENTITY,
   UNAUTHORIZED,
   NOT_FOUND,
+  BAD_REQUEST,
 } from '../constants/responceCodes';
 
 export class BaseAPI {
@@ -53,6 +54,10 @@ export class BaseAPI {
 
   async assertNotFoundResponseCode(response) {
     await this.assertResponseCode(response, NOT_FOUND);
+  }
+
+  async assertBadRequestResponseCode(response) {
+    await this.assertResponseCode(response, BAD_REQUEST);
   }
 
   async assertBodyIsNotEmpty(response) {

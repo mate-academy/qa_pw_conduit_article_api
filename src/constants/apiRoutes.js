@@ -1,6 +1,10 @@
 export const ROOT = 'api';
 
 export const ROUTES = {
+  articles: {
+    create: `${ROOT}/articles`,
+    slug: slug => `${ROOT}/articles/${slug}`,
+  },
   user: `${ROOT}/user`,
   users: {
     index: `${ROOT}/users`,
