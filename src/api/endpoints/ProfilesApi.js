@@ -9,27 +9,43 @@ export class ProfilesApi extends BaseAPI {
   }
 
   async getProfile(username) {
-    return await this.step(`Get profile for a user`, async () => {
+    return await this.step('Get profile for a user', async () => {
       return await this.request.get(ROUTES.profiles(username).index, {
         headers: this._headers,
       });
     });
   }
 
-  async followProfile(username) {
-    return await this.step(`Follow user's profile`, async () => {
-      return await this.request.post(ROUTES.profiles(username).follow, {});
+  async followProfile(username, authorization) {
+    return await this.step("Follow user's profile", async () => {
+      const headers = { ...this._headers };
+
+      if (authorization !== undefined) {
+        headers.authorization = authorization;
+      }
+
+      return await this.request.post(ROUTES.profiles(username).follow, {
+        headers,
+      });
     });
   }
 
-  async unfollowProfile(username) {
-    return await this.step(`Unfollow user's profile`, async () => {
-      return await this.request.get(ROUTES.profiles(username).follow, {});
+  async unfollowProfile(username, authorization) {
+    return await this.step("Unfollow user's profile", async () => {
+      const headers = { ...this._headers };
+
+      if (authorization !== undefined) {
+        headers.authorization = authorization;
+      }
+
+      return await this.request.delete(ROUTES.profiles(username).follow, {
+        headers,
+      });
     });
   }
 
   async assertUsernameHasCorrectValue(response, username) {
-    await this.step(`Assert response body has correct username`, async () => {
+    await this.step('Assert response body has correct username', async () => {
       const body = await this.parseBody(response);
 
       expect(body.profile.username).toBe(username);
@@ -38,7 +54,7 @@ export class ProfilesApi extends BaseAPI {
 
   async assertImageHasCorrectValue(response, image) {
     await this.step(
-      `Assert response body has correct image value`,
+      'Assert response body has correct image value',
       async () => {
         const body = await this.parseBody(response);
 
@@ -48,7 +64,7 @@ export class ProfilesApi extends BaseAPI {
   }
 
   async assertBioHasCorrectValue(response, bio) {
-    await this.step(`Assert response body has correct bio`, async () => {
+    await this.step('Assert response body has correct bio', async () => {
       const body = await this.parseBody(response);
 
       expect(body.profile.bio).toBe(bio);
@@ -56,21 +72,18 @@ export class ProfilesApi extends BaseAPI {
   }
 
   async assertFollowingFieldHasValue(response, value) {
-    await this.step(
-      `Assert response body has '${value}' in 'following' field`,
-      async () => {
-        const body = await this.parseBody(response);
+    await this.step(`Assert following is ${value}`, async () => {
+      const body = await this.parseBody(response);
 
-        expect(body.profile.following).toBe(value);
-      },
-    );
+      expect(body.profile.following).toBe(value);
+    });
   }
 
   async assertFollowingHasValueFalse(response) {
-    this.assertFollowingFieldHasValue(response, false);
+    await this.assertFollowingFieldHasValue(response, false);
   }
 
   async assertFollowingHasValueTrue(response) {
-    this.assertFollowingFieldHasValue(response, true);
+    await this.assertFollowingFieldHasValue(response, true);
   }
 }

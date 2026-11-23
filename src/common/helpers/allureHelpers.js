@@ -1,19 +1,19 @@
 import { camelCaseToPhrase, capitalize } from './stringHelpers';
 
 export function parseTestTreeHierarchy(fileName, logger) {
+  const normalizedPath = fileName.replace(/\\/g, '/');
   const testFolder = 'tests/';
+  const folderIndex = normalizedPath.indexOf(testFolder);
 
-  const attributesCamelCase = fileName
-    .substring(fileName.indexOf(testFolder) + testFolder.length)
-    .split('/');
-
-  let attributes = attributesCamelCase.map(attribute =>
-    capitalize(camelCaseToPhrase(attribute)),
-  );
-
-  if (attributes[2].includes('.spec.js')) {
-    attributes = attributes.slice(0, 2);
+  if (folderIndex === -1) {
+    throw new Error(`Tests folder not found in path: ${fileName}`);
   }
+
+  const attributes = normalizedPath
+    .slice(folderIndex + testFolder.length)
+    .split('/')
+    .filter(part => !part.endsWith('.spec.js'))
+    .map(part => capitalize(camelCaseToPhrase(part)));
 
   logger.debug(`Parsed test hierarchy: ${JSON.stringify(attributes)}`);
 
